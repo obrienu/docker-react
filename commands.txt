@@ -1,0 +1,21 @@
+docker run -p 3000:3000 -v $(pwd):/app IMAGE ID
+
+docker run -p 3000:3000 -v /app/node_modules -v $(pwd):/app  43aecc8cded1
+
+
+Recently, a bug was introduced with the latest Create React App version that is causing the React app to exit when starting with Docker Compose.
+
+To Resolve this:
+
+Add stdin_open property to your docker-compose.yml file
+
+  web:
+    stdin_open: true
+
+
+If you are using any version of Windows and your React app is not automatically reloading after a code change, you can add this environment variable to your compose file:
+
+services:
+  web:
+    environment:
+      - CHOKIDAR_USEPOLLING=true
