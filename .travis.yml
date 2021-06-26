@@ -1,0 +1,12 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+before_innstall:
+  - docker build -t obrien/docker-react -f Dockerfile.dev .
+
+script:
+  - docker run -e CI=true obrien/docker-react npm run test -- --coverage
+
+
